@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    <p><strong>Nombre:</strong>{{object.nombre}}</p>
+    <p><strong>Apellido:</strong>{{object.apellido}}</p>
+    <p><strong>Cargo:</strong>{{object.cargo}}</p>
+    <p><strong>Email:</strong>{{object.email}}</p>
+    <p><strong>Contraseña:</strong>{{object.contrasena}}</p>
+
+    <a class="btn btn-success" href="{% url 'usuario:usuario_listar' %}">OK</a>
+    <a class="btn btn-success" href="{% url 'usuario:usuario_editar' usuario.id %}">Editar</a>
+    <a class="btn btn-success" href="{% url 'usuario:usuario_eliminar' usuario.id %}">Eliminar</a>
+
+{% endblock %}
+</div>

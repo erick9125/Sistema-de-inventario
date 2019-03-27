@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+    {% block contenido %}
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                   <td>id</td> 
+                   <td>marca</td> 
+                   <td>modelo</td> 
+                   <td>serie</td> 
+                   <td>rotulo</td> 
+                   <td>fecha de ingreso</td> 
+                </tr>
+            </thead>
+            <tbody>
+                {% if object_list %}
+                {% for equipo in object_list %}
+                <tr>
+                    <td>{{ equipo.id}}</td>
+                    <td>{{ equipo.marca}}</td>
+                    <td>{{ equipo.modelo}}</td>
+                    <td>{{ equipo.serie}}</td>
+                    <td>{{ equipo.rotulo}}</td>
+                    <td>{{ equipo.fecha_ing}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'equipos:equipo_mostrar' equipo.id %}">Ver</a>
+                        <a class="btn btn-info" href="{% url 'equipos:equipo_editar' equipo.id %}">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'equipos:equipo_eliminar' equipo.id %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor%}
+                {% else %}
+                    <h1>no hay registro de Equipos</h1>
+                {% endif%}
+            </tbody>
+            
+        </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    {% if page_obj.has_previous %}
+                      <a class="page-link" href="?page={{page_obj.previous_page_number}}">Anterior</a>
+                      {% endif%}
+                    </li>
+                  
+                  <li class="page-item">
+                        {% if page_obj.has_next %}
+                      <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
+                      {% endif%}
+                </li>
+                </ul>
+              </nav>
+    {% endblock %}
+</div>

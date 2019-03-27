@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+    {% block contenido %}
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                   <td>id</td> 
+                   <td>Marca</td> 
+                   <td>Modelo</td> 
+                   <td>Serie</td> 
+                   <td>Número de teléfono<td> 
+                </tr>
+            </thead>
+            <tbody>
+                {% if object_list %}
+                {% for telefono in object_list %}
+                <tr>
+                    <td>{{ telefono.id}}</td>
+                    <td>{{ telefono.marca_tel}}</td>
+                    <td>{{ telefono.modelo_tel}}</td>
+                    <td>{{ telefono.serie_tel}}</td>
+                    <td>{{ telefono.numero_tel}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'telefono:telefono_mostrar' telefono.id %}">Ver</a>
+                        <a class="btn btn-info" href="{% url 'telefono:telefono_editar' telefono.id %}">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'telefono:telefono_eliminar' telefono.id %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor%}
+                {% else %}
+                    <h1>No hay registro de Teléfonos</h1>
+                {% endif%}
+            </tbody>
+
+        </table>
+        <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    {% if page_obj.has_previous %}
+                      <a class="page-link" href="?page={{page_obj.previous_page_number}}">Anterior</a>
+                      {% endif%}
+                    </li>
+                  
+                  <li class="page-item">
+                        {% if page_obj.has_next %}
+                      <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
+                      {% endif%}
+                </li>
+                </ul>
+        </nav>
+    {% endblock %}
+</div>

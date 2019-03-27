@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    <p><strong>ID:</strong>{{object.id}}</p>
+    <p><strong>Ot:</strong>{{object.ot}}</p>
+    <p><strong>Modelo PDA:</strong>{{object.modelo_pda}}</p>
+    <p><strong>Serie PDA:</strong>{{object.serie_pda}}</p>
+    <p><strong>Fecha de ingreso:</strong>{{object.fecha_ing}}</p>
+    <p><strong>Fecha de despacho:</strong>{{object.fecha_desp}}</p>
+    <p><strong>Serie de bateria:</strong>{{object.serie_bateria}}</p>
+    <p><strong>Número de inventario:</strong>{{object.num_inventario}}</p>
+    <p><strong>Sucursal:</strong>{{object.sucursal}}</p>
+    <p><strong>Región:</strong>{{object.region}}</p>
+    <p><strong>Estado:</strong>{{object.estado}}</p>
+    <p><strong>Días en servicio técnico:</strong>{{object.dias_st}}</p>
+    <p><strong>Descripción:</strong>{{object.descripcion_pda}}</p>
+
+    <a class="btn btn-success" href="{% url 'pda:pda_listar' %}">OK</a>
+    <a class="btn btn-primary" href="{% url 'pda:pda_editar' pda.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'pda:pda_eliminar' pda.id %}">Eliminar</a>
+
+{% endblock %}
+</div>

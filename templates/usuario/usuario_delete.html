@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <h3>Desea eliminar el registro de {{object.nombre}}?</h3>
+        <button class="btn btn-danger" type="submit">Si,eliminar</button>
+        <a class="btn btn-default" href="{% url 'usuario:usuario_listar' %}">Cancelar</a>
+        
+    </form>
+
+{% endblock %}
+</div>

@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    <p><strong>ID:</strong>{{object.id}}</p>
+    <p><strong>Marca:</strong>{{object.marca}}</p>
+    <p><strong>Modelo:</strong>{{object.modelo}}</p>
+    <p><strong>Serie:</strong>{{object.serie}}</p>
+    <p><strong>Rotulo:</strong>{{object.rotulo}}</p>
+    <p><strong>Fecha de Ingreso:</strong>{{object.fecha_ing}}</p>
+    <p><strong>Tipo:</strong>{{object.tipo}}</p>
+    <p><strong>Descripción:</strong>{{object.descripcion}}</p>
+
+    <a class="btn btn-success" href="{% url 'equipos:equipo_listar' %}">OK</a>
+    <a class="btn btn-primary" href="{% url 'equipos:equipo_editar' equipo.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'equipos:equipo_eliminar' equipo.id %}">Eliminar</a>
+
+{% endblock %}
+</div>

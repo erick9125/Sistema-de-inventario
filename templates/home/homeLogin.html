@@ -1,0 +1,39 @@
+{% extends "base/baseLogin.html" %}
+{% if messg %}
+<script>
+  alert('{{messg}}');
+</script>
+{% endif %}
+
+
+<div class="container mt-5 my-5">
+{% block contenido %}
+<div class="modal-dialog text-center">
+  <div class="col-sm-8 main-section">
+      <div class="modal-content">
+          <div class="col-12 user-img">
+              <img src="/static/img/user.png"/>
+          </div>
+          <form class="col-12" action="/postsign/" method="POST">
+              {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="text-uppercase">Usuario</label>
+              <input type="email" name="email" class="form-control" placeholder="@CorreoElectronico">
+              
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
+              <input type="password" name="password" class="form-control" placeholder="Contraseña">
+            </div> 
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" value="signIn">Ingresar</button>
+            </div>    
+              </div>
+             
+              
+          </form>
+      </div>
+  </div>
+</div>
+{%  endblock %}
+</div>

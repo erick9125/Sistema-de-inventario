@@ -1,0 +1,23 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    <p><strong>ID:</strong>{{object.id}}</p>
+    <p><strong>Usuario Asignado:</strong>{{object.usuario_asig}}</p>
+    <p><strong>Cargo:</strong>{{object.cargo}}</p>
+    <p><strong>Departamento:</strong>{{object.departamento}}</p>
+    <p><strong>Marca equipo asignado:</strong>{{object.marca_equipo_asig}}</p>
+    <p><strong>Modelo equipo asignado:</strong>{{object.modelo_equipo_asig}}</p>
+    <p><strong>Serie equipo asignado:</strong>{{object.serie_equipo_asig}}</p>
+    <p><strong>Rotulo equipo asignado:</strong>{{object.rotulo_equipo_asig}}</p>
+    <p><strong>Tipo de equipo:</strong>{{object.tipo_equipo}}</p>
+    <p><strong>Activo:</strong>{{object.activo}}</p>
+
+    <a class="btn btn-success" href="{% url 'Asignacion:asignacion_listar' %}">OK</a>
+    <a class="btn btn-primary" href="{% url 'Asignacion:asignacion_editar' asignacion.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'Asignacion:asignacion_eliminar' asignacion.id %}">Eliminar</a>
+
+{% endblock %}
+</div>
+

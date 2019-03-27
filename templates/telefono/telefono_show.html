@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    <p><strong>ID:</strong>{{object.id}}</p>
+    <p><strong>Marca:</strong>{{object.marca_tel}}</p>
+    <p><strong>Modelo:</strong>{{object.modelo_tel}}</p>
+    <p><strong>Serie/IMEI:</strong>{{object.serie_tel}}</p>
+    <p><strong>Número de teléfono:</strong>{{object.numero_tel}}</p>
+    <p><strong>Fecha de registro:</strong>{{object.fecha_ing_tel}}</p>
+    <p><strong>Usuario asignado:</strong>{{object.usuario_asig_tel}}</p>
+    <p><strong>Departamento:</strong>{{object.departamento_usuario}}</p>
+
+    <a class="btn btn-success" href="{% url 'telefono:telefono_listar' %}">OK</a>
+    <a class="btn btn-primary" href="{% url 'telefono:telefono_editar' telefono.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'telefono:telefono_eliminar' telefono.id %}">Eliminar</a>
+
+{% endblock %}
+</div>

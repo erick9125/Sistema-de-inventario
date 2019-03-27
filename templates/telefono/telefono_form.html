@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+<div class="container mt-5 my-5">
+
+{% block contenido %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" type="submit">Registrar</button>
+        <a class="btn btn-primary" href="{% url 'telefono:telefono_listar' %}">Cancelar</a>
+    </form>
+
+{% endblock %}
+</div>
