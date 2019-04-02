@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import CreateView , ListView,UpdateView, DeleteView
+from django.views.generic import CreateView , ListView,UpdateView, DeleteView,TemplateView
 from django.views.generic.detail import DetailView
 from apps.inventario.models import usuario ,equipo , asignacion , pda , telefono
 from apps.inventario.forms import UsuarioForm , EquipoForm , asignacionForm, pdaForm, telefonoForm
 from django.urls import reverse_lazy
 import pyrebase
 from django.contrib import auth
+from .filters import equipoFilter
+from openpyxl import Workbook
+from django.http.response import HttpResponse
 # Create your views here.
 #vista de pagina home y login
 def home(request):
@@ -40,8 +43,39 @@ class usuarioShow(DetailView):
     template_name = 'usuario/usuario_show.html'
 
 
+class ReporteEquipoExcel(TemplateView):
+    def get(self,request,*args,**kwargs):
+        _equipo = equipo.objects.all()
+        wb = Workbook()
+        ws = wb.active
+        ws['B1'] = 'REPORTE DE EQUIPOS'
 
+        ws.merge_cells('B1:E1')
+        ws['B3'] = 'Marca'
+        ws['C3'] = 'Modelo'
+        ws['D3'] = 'Serie'
+        ws['E3'] = 'Rotulo'
+        ws['F3'] = 'Fecha ingreso'
+        ws['G3'] = 'Tipo'
+        ws['H3'] = 'Descripcion'
 
+        cont = 7
+        for equipos in _equipo:
+            ws.cell(row = cont, column = 2).value = equipos.marca
+            ws.cell(row = cont, column = 3).value = equipos.modelo
+            ws.cell(row = cont, column = 4).value = equipos.serie
+            ws.cell(row = cont, column = 5).value = equipos.rotulo
+            ws.cell(row = cont, column = 6).value = equipos.fecha_ing
+            ws.cell(row = cont, column = 7).value = equipos.tipo
+            ws.cell(row = cont, column = 8).value = equipos.descripcion
+            cont+=1
+
+        nombre_archivo = "ReporteEquipoExcel.xlsx"
+        response = HttpResponse(content_type = "application/ms-excel")
+        content = "attachment; filename = {0}".format(nombre_archivo)
+        response['Content-Disposition'] = content
+        wb.save(response)
+        return response
 
 #listas para agregar y editar equipamiento
 class EquipamientoCreate(CreateView):
@@ -54,7 +88,7 @@ class equipoList(ListView):
     model = equipo
     template_name = 'equipos/equipo_list.html'
     paginate_by = 20
-    
+   
 
 class equipoUpdate(UpdateView):
     model = equipo

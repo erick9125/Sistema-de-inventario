@@ -2,7 +2,13 @@
 
 <div class="container mt-5 my-5">
     {% block contenido %}
-    
+
+    <div class="container my-5">
+        <form method="GET">
+            {{filters.form|bootstrap}}
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </form>
+    </div>
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -52,9 +58,5 @@
                 </li>
                 </ul>
               </nav>
-              <div class="container my-5">
-                <a class="btn btn-success" href="{% url 'equipos:equipo_reporte' %}">Exportar a Excel</a>
-              </div>
-            
     {% endblock %}
 </div>

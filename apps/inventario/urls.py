@@ -4,7 +4,8 @@ from django.conf.urls import url , include
 from . import views
 
 
-from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow
+
+from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel
 
 app_name = 'inventario'
 
@@ -28,6 +29,8 @@ urlpatterns = [
     url(r'^editarEquipo/(?P<pk>\d+)/$',equipoUpdate.as_view(),name='equipo_editar'),
     url(r'^eliminarEquipo/(?P<pk>\d+)/$',equipoDelete.as_view(),name='equipo_eliminar'),
     url(r'^mostrarEquipo/(?P<pk>\d+)/$',equipoShow.as_view(),name='equipo_mostrar'),
+    url(r'^reporte_excel_equipo/',ReporteEquipoExcel.as_view(),name='equipo_reporte'),
+    
   
     #URLS para asignacion
     url(r'^nuevaAsignacion/', AsignacionCreate.as_view(),name='asignacion_crear'),
