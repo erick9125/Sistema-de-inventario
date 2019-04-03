@@ -5,7 +5,7 @@ from . import views
 
 
 
-from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel
+from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel
 
 app_name = 'inventario'
 
@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^$', views.singIn),
     url(r'^postsign/', views.postsign),
     url(r'^logout/',views.logout,name='log'),
+    url(r'^informe/',views.informe,name='informe'),
    
     #URLS para mostrar usuarios
     url(r'^nuevoUsuario/', UsuarioCreate.as_view(), name='usuario_crear'),
@@ -38,12 +39,14 @@ urlpatterns = [
     url(r'^editarAsignacion/(?P<pk>\d+)/$',asignacionUpdate.as_view(),name='asignacion_editar'),
     url(r'^eliminarAsignacion/(?P<pk>\d+)/$',asignacionDelete.as_view(),name='asignacion_eliminar'),
     url(r'^mostrarAsignacion/(?P<pk>\d+)/$',asignacionShow.as_view(),name='asignacion_mostrar'),
+    url(r'^reporte_excel_asignacion/',ReporteAsignacionExcel.as_view(),name='asignacion_reporte'),
     #URLS para pda
     url(r'^nuevaPda/', pdaCreate.as_view(),name='pda_crear'),
     url(r'^listarpda/',pdaList.as_view(),name='pda_listar'),
     url(r'^editarPda/(?P<pk>\d+)/$',pdaUpdate.as_view(),name='pda_editar'),
     url(r'^eliminarPda/(?P<pk>\d+)/$',pdaDelete.as_view(),name='pda_eliminar'),
     url(r'^mostrarPda/(?P<pk>\d+)/$',pdaShow.as_view(),name='pda_mostrar'),
+    url(r'^reporte_excel_pda/',ReportePdaExcel.as_view(),name='pda_reporte'),
     #URL para telefono
     url(r'^nuevoTelefono/', telefonoCreate.as_view(),name='telefono_crear'),
     url(r'^listarTelefono/',telegonoList.as_view(),name='telefono_listar'),

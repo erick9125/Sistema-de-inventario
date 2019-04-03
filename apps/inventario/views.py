@@ -10,12 +10,15 @@ from .filters import equipoFilter
 from openpyxl import Workbook
 from django.http.response import HttpResponse
 # Create your views here.
-#vista de pagina home y login
+#vista de pagina home y login **************************************************************************************
 def home(request):
     return render(request, 'home/homeLogin.html')
 
+def informe(request):
+    return render(request,'informe/informe.html')
 
-#vistas de usuario
+
+#vistas de usuario *************************************************************************************************
 class UsuarioCreate(CreateView):
     model = usuario
     form_class = UsuarioForm
@@ -43,41 +46,8 @@ class usuarioShow(DetailView):
     template_name = 'usuario/usuario_show.html'
 
 
-class ReporteEquipoExcel(TemplateView):
-    def get(self,request,*args,**kwargs):
-        _equipo = equipo.objects.all()
-        wb = Workbook()
-        ws = wb.active
-        ws['B1'] = 'REPORTE DE EQUIPOS'
 
-        ws.merge_cells('B1:E1')
-        ws['B3'] = 'Marca'
-        ws['C3'] = 'Modelo'
-        ws['D3'] = 'Serie'
-        ws['E3'] = 'Rotulo'
-        ws['F3'] = 'Fecha ingreso'
-        ws['G3'] = 'Tipo'
-        ws['H3'] = 'Descripcion'
-
-        cont = 7
-        for equipos in _equipo:
-            ws.cell(row = cont, column = 2).value = equipos.marca
-            ws.cell(row = cont, column = 3).value = equipos.modelo
-            ws.cell(row = cont, column = 4).value = equipos.serie
-            ws.cell(row = cont, column = 5).value = equipos.rotulo
-            ws.cell(row = cont, column = 6).value = equipos.fecha_ing
-            ws.cell(row = cont, column = 7).value = equipos.tipo
-            ws.cell(row = cont, column = 8).value = equipos.descripcion
-            cont+=1
-
-        nombre_archivo = "ReporteEquipoExcel.xlsx"
-        response = HttpResponse(content_type = "application/ms-excel")
-        content = "attachment; filename = {0}".format(nombre_archivo)
-        response['Content-Disposition'] = content
-        wb.save(response)
-        return response
-
-#listas para agregar y editar equipamiento
+#listas para agregar y editar equipamiento **********************************************************************
 class EquipamientoCreate(CreateView):
     model = equipo
     form_class = EquipoForm
@@ -105,8 +75,41 @@ class equipoShow(DetailView):
     model = equipo
     template_name = 'equipos/equipo_show.html'
   
+class ReporteEquipoExcel(TemplateView):
+    def get(self,request,*args,**kwargs):
+        _equipo = equipo.objects.all()
+        wb = Workbook()
+        ws = wb.active
+        ws['B1'] = 'REPORTE DE EQUIPOS'
 
-#listas para agregar y editar asignacion de equipamiento
+        ws.merge_cells('B1:E1')
+        ws['B3'] = 'Marca'
+        ws['C3'] = 'Modelo'
+        ws['D3'] = 'Serie'
+        ws['E3'] = 'Rotulo'
+        ws['F3'] = 'Fecha ingreso'
+        ws['G3'] = 'Tipo'
+        ws['H3'] = 'Descripcion'
+
+        cont = 4
+        for equipos in _equipo:
+            ws.cell(row = cont, column = 2).value = equipos.marca
+            ws.cell(row = cont, column = 3).value = equipos.modelo
+            ws.cell(row = cont, column = 4).value = equipos.serie
+            ws.cell(row = cont, column = 5).value = equipos.rotulo
+            ws.cell(row = cont, column = 6).value = equipos.fecha_ing
+            ws.cell(row = cont, column = 7).value = equipos.tipo
+            ws.cell(row = cont, column = 8).value = equipos.descripcion
+            cont+=1
+
+        nombre_archivo = "ReporteEquipoExcel.xlsx"
+        response = HttpResponse(content_type = "application/ms-excel")
+        content = "attachment; filename = {0}".format(nombre_archivo)
+        response['Content-Disposition'] = content
+        wb.save(response)
+        return response
+
+#listas para agregar y editar asignacion de equipamiento ******************************************************************
 class AsignacionCreate(CreateView):
     model = asignacion
     form_class = asignacionForm
@@ -133,7 +136,47 @@ class asignacionShow(DetailView):
     model = asignacion
     template_name = 'asignacion/asignacion_show.html'
 
-#listas para agregar y editar pda
+class ReporteAsignacionExcel(TemplateView):
+    def get(self,request,*args,**kwargs):
+        _asig = asignacion.objects.all()
+        wb = Workbook()
+        ws = wb.active
+        ws['B1'] = 'REPORTE DE ASIGNACIONES'
+
+        ws.merge_cells('B1:E1')
+        ws['B3'] = 'Usuario asignado'
+        ws['C3'] = 'Cargo'
+        ws['D3'] = 'Departamento'
+        ws['E3'] = 'Fecha_entrega'
+        ws['F3'] = 'Marca_equipo_asignado'
+        ws['G3'] = 'Modelo_equipo_asignado'
+        ws['H3'] = 'Serie_equipo_asignado'
+        ws['I3'] = 'Rotulo_equipo_asignado'
+        ws['J3'] = 'Tipo_equipo'
+        ws['K3'] = 'Tipo_equipo'
+
+        cont = 4
+        for asig in _asig:
+            ws.cell(row = cont, column = 2).value = asig.usuario_asig
+            ws.cell(row = cont, column = 3).value = asig.cargo
+            ws.cell(row = cont, column = 4).value = asig.departamento
+            ws.cell(row = cont, column = 5).value = asig.fecha_entrega
+            ws.cell(row = cont, column = 6).value = asig.marca_equipo_asig
+            ws.cell(row = cont, column = 7).value = asig.modelo_equipo_asig
+            ws.cell(row = cont, column = 8).value = asig.serie_equipo_asig
+            ws.cell(row = cont, column = 9).value = asig.rotulo_equipo_asig
+            ws.cell(row = cont, column = 10).value = asig.tipo_equipo
+            ws.cell(row = cont, column = 11).value = asig.activo
+
+        nombre_archivo = "ReporteAsignacionExcel.xlsx"
+        response = HttpResponse(content_type = "application/ms-excel")
+        content = "attachment; filename = {0}".format(nombre_archivo)
+        response['Content-Disposition'] = content
+        wb.save(response)
+        return response        
+
+
+#listas para agregar y editar pda ******************************************************************************
 class pdaCreate(CreateView):
     model = pda
     form_class = pdaForm
@@ -160,8 +203,50 @@ class pdaShow(DetailView):
     model = pda
     template_name = 'pda/pda_show.html'
 
+class ReportePdaExcel(TemplateView):
+    def get(self,request,*args,**kwargs):
+        _pda = pda.objects.all()
+        wb = Workbook()
+        ws = wb.active
+        ws['B1'] = 'REPORTE DE PDA'
 
-#listas para agregar y editar teléfono
+        ws.merge_cells('B1:E1')
+        ws['B3'] = 'OT'
+        ws['C3'] = 'modelo_pda'
+        ws['D3'] = 'serie_pda'
+        ws['E3'] = 'fecha_ing'
+        ws['F3'] = 'fecha_desp'
+        ws['G3'] = 'serie_bateria'
+        ws['H3'] = 'num_inventario'
+        ws['I3'] = 'sucursal'
+        ws['J3'] = 'region'
+        ws['K3'] = 'estado'
+        ws['L3'] = 'dias_st'
+        ws['M3'] = 'descripcion_pda'
+
+        cont = 4
+        for PDAS in _pda:
+            ws.cell(row = cont, column = 2).value = PDAS.ot
+            ws.cell(row = cont, column = 3).value = PDAS.modelo_pda
+            ws.cell(row = cont, column = 4).value = PDAS.serie_pda
+            ws.cell(row = cont, column = 5).value = PDAS.fecha_ing
+            ws.cell(row = cont, column = 6).value = PDAS.fecha_desp
+            ws.cell(row = cont, column = 7).value = PDAS.serie_bateria
+            ws.cell(row = cont, column = 8).value = PDAS.num_inventario
+            ws.cell(row = cont, column = 9).value = PDAS.sucursal
+            ws.cell(row = cont, column = 10).value = PDAS.region
+            ws.cell(row = cont, column = 11).value = PDAS.estado
+            ws.cell(row = cont, column = 12).value = PDAS.dias_st
+            ws.cell(row = cont, column = 13).value = PDAS.descripcion_pda
+
+        nombre_archivo = "ReportePDAExcel.xlsx"
+        response = HttpResponse(content_type = "application/ms-excel")
+        content = "attachment; filename = {0}".format(nombre_archivo)
+        response['Content-Disposition'] = content
+        wb.save(response)
+        return response
+
+#listas para agregar y editar teléfono **************************************************************
 class telefonoCreate(CreateView):
     model = telefono
     form_class = telefonoForm
@@ -188,7 +273,7 @@ class telefonoShow(DetailView):
     model = telefono
     template_name = 'telefono/telefono_show.html'
 
-#codigo firebase para login de usuario
+#codigo firebase para login de usuario ************************************************************************
 config = {
     
     'apiKey': "AIzaSyDmQIep3GlGhWWnllaGxIztt8NjROcGMAU",

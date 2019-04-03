@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+
+<div class="container">
+{% block contenido%}
+<div class="row">
+    <div class="col-md-4 well my-5">
+        <div class="card text-white bg-info" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Informe de Equipos</h5>
+                <p class="card-text">Este informe contiene todo el contenido de la información de los equipos ingresados al inventario.</p>
+                <a href="{% url 'equipos:equipo_reporte' %}" class="btn text-white btn-outline-primary">Descargar informe</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 well my-5">
+            <div class="card text-white bg-success" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Informe de Asignaciones</h5>
+                    <p class="card-text">Este informe contiene todo el contenido de la información de los equipos asignados ingresados al inventario.</p>
+                    <a href="{% url 'Asignacion:asignacion_reporte' %}" class="btn text-white btn-outline-primary">Descargar informe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 well my-5">
+                <div class="card text-white bg-secondary" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Informe de telefonía</h5>
+                        <p class="card-text">Este informe contiene todo el contenido de la información de los teléfonos ingresados al inventario.</p>
+                        <a href="#" class="btn text-white btn-outline-primary">Descargar informe</a>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-4 well my-5">
+            <div class="card text-white bg-danger" style="width: 18rem;">
+                <div class="card-body">
+                     <h5 class="card-title">Informe de PDA</h5>
+                     <p class="card-text">Este informe contiene todo el contenido de la información de los equipos PDA ingresados al inventario.</p>
+                    <a href="{% url 'pda:pda_reporte' %}" class="btn text-white btn-outline-primary">Descargar informe</a>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
+</div>
