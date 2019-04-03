@@ -273,6 +273,41 @@ class telefonoShow(DetailView):
     model = telefono
     template_name = 'telefono/telefono_show.html'
 
+class ReporteTelefonoExcel(TemplateView):
+    def get(self,request,*args,**kwargs):
+        _telef = telefono.objects.all()
+        wb = Workbook()
+        ws = wb.active
+        ws['B1'] = 'REPORTE DE TELEFONOS'
+
+        ws.merge_cells('B1:E1')
+        ws['B3'] = 'marca_tel'
+        ws['C3'] = 'modelo_tel'
+        ws['D3'] = 'serie_tel'
+        ws['E3'] = 'numero_tel'
+        ws['F3'] = 'fecha_ing_tel'
+        ws['G3'] = 'usuario_asig_tel'
+        ws['H3'] = 'departamento_usuario'
+      
+
+        cont = 4
+        for phone in _telef:
+            ws.cell(row = cont, column = 2).value = phone.marca_tel
+            ws.cell(row = cont, column = 3).value = phone.modelo_tel
+            ws.cell(row = cont, column = 4).value = phone.serie_tel
+            ws.cell(row = cont, column = 5).value = phone.numero_tel
+            ws.cell(row = cont, column = 6).value = phone.fecha_ing_tel
+            ws.cell(row = cont, column = 7).value = phone.usuario_asig_tel
+            ws.cell(row = cont, column = 8).value = phone.departamento_usuario
+            
+
+        nombre_archivo = "ReporteTelefonoExcel.xlsx"
+        response = HttpResponse(content_type = "application/ms-excel")
+        content = "attachment; filename = {0}".format(nombre_archivo)
+        response['Content-Disposition'] = content
+        wb.save(response)
+        return response
+
 #codigo firebase para login de usuario ************************************************************************
 config = {
     

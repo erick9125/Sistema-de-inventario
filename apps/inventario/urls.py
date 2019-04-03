@@ -5,7 +5,7 @@ from . import views
 
 
 
-from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel
+from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel,ReporteTelefonoExcel
 
 app_name = 'inventario'
 
@@ -52,5 +52,6 @@ urlpatterns = [
     url(r'^listarTelefono/',telegonoList.as_view(),name='telefono_listar'),
     url(r'^editarTelefono/(?P<pk>\d+)/$',telefonoUpdate.as_view(),name='telefono_editar'),
     url(r'^eliminarTelefono/(?P<pk>\d+)/$',telefonoDelete.as_view(),name='telefono_eliminar'),
-    url(r'^mostrarTelefono/(?P<pk>\d+)/$',telefonoShow.as_view(),name='telefono_mostrar')
+    url(r'^mostrarTelefono/(?P<pk>\d+)/$',telefonoShow.as_view(),name='telefono_mostrar'),
+    url(r'^reporte_excel_telefono/',ReporteTelefonoExcel.as_view(),name='telefono_reporte'),
 ]
