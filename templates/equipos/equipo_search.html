@@ -1,6 +1,5 @@
 {% extends "base/base.html" %}
-
-
+{% load crispy_forms_tags %}
 
 
 <div class="container mt-5 my-5">
@@ -9,7 +8,7 @@
     <div class="container my-5">
         <form method="GET">
             {% csrf_token %}
-            {{ filter.form}}
+            {{ filter.form |crispy}}
             <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
     </div>
