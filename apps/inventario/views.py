@@ -74,6 +74,11 @@ class equipoDelete(DeleteView):
 class equipoShow(DetailView):
     model = equipo
     template_name = 'equipos/equipo_show.html'
+
+def equipoBuscar(request):
+    
+    f = equipoFilter(request.GET, queryset= equipo.objects.all())
+    return render(request , 'equipos/equipo_search.html' , {'filter' : f})
   
 class ReporteEquipoExcel(TemplateView):
     def get(self,request,*args,**kwargs):

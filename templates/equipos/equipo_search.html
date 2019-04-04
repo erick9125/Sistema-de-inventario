@@ -1,11 +1,15 @@
 {% extends "base/base.html" %}
 
+
+
+
 <div class="container mt-5 my-5">
     {% block contenido %}
 
     <div class="container my-5">
         <form method="GET">
-            {{filters.form|bootstrap}}
+            {% csrf_token %}
+            {{ filter.form}}
             <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
     </div>
@@ -21,8 +25,8 @@
                 </tr>
             </thead>
             <tbody>
-                {% if object_list %}
-                {% for equipo in object_list %}
+                
+                {% for equipo in filter.qs %}
                 <tr>
                     <td>{{ equipo.id}}</td>
                     <td>{{ equipo.marca}}</td>
@@ -30,16 +34,10 @@
                     <td>{{ equipo.serie}}</td>
                     <td>{{ equipo.rotulo}}</td>
                     <td>{{ equipo.fecha_ing}}</td>
-                    <td>
-                        <a class="btn btn-primary" href="{% url 'equipos:equipo_mostrar' equipo.id %}">Ver</a>
-                        <a class="btn btn-info" href="{% url 'equipos:equipo_editar' equipo.id %}">Editar</a>
-                        <a class="btn btn-danger" href="{% url 'equipos:equipo_eliminar' equipo.id %}">Eliminar</a>
-                    </td>
+                    
                 </tr>
                 {% endfor%}
-                {% else %}
-                    <h1>no hay registro de Equipos</h1>
-                {% endif%}
+                
             </tbody>
             
         </table>
