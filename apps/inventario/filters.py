@@ -2,7 +2,11 @@ import django_filters
 from apps.inventario.models import usuario,equipo,asignacion,pda,telefono
 
 class equipoFilter(django_filters.FilterSet):
-
+    def __init__(self, *args, **kwargs):
+        super(equipoFilter, self).__init__(*args, **kwargs)
+        self.filters['modelo'].label = 'Modelo :'
+        self.filters['serie'].label = 'Serie :'
+        self.filters['fecha_ing'].label = 'Fecha de ingreso :'
 
     class Meta:
         model = equipo
@@ -10,3 +14,16 @@ class equipoFilter(django_filters.FilterSet):
             'modelo', 'serie', 'fecha_ing'
         ]
         
+        
+class asignacionFilter(django_filters.FilterSet):
+    def __init__(self, *args, **kwargs):
+        super(asignacionFilter, self).__init__(*args, **kwargs)
+        self.filters['usuario_asig'].label = 'Usuario Asignado :'
+        self.filters['fecha_entrega'].label = 'Fecha de entrega :'
+        self.filters['serie_equipo_asig'].label = 'Serie del equipo asignado :'
+        
+    class Meta:
+        model = asignacion
+        fields = [
+            'usuario_asig', 'fecha_entrega', 'serie_equipo_asig'
+        ]

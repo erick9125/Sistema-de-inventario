@@ -5,7 +5,7 @@ from . import views
 
 
 
-from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel,ReporteTelefonoExcel,equipoBuscar
+from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel,ReporteTelefonoExcel,equipoBuscar,asignacionBuscar
 
 app_name = 'inventario'
 
@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^eliminarAsignacion/(?P<pk>\d+)/$',asignacionDelete.as_view(),name='asignacion_eliminar'),
     url(r'^mostrarAsignacion/(?P<pk>\d+)/$',asignacionShow.as_view(),name='asignacion_mostrar'),
     url(r'^reporte_excel_asignacion/',ReporteAsignacionExcel.as_view(),name='asignacion_reporte'),
+    url(r'^buscarAsignacion/', views.asignacionBuscar,name='asignacion_buscar'),
     #URLS para pda
     url(r'^nuevaPda/', pdaCreate.as_view(),name='pda_crear'),
     url(r'^listarpda/',pdaList.as_view(),name='pda_listar'),

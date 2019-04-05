@@ -6,7 +6,7 @@ from apps.inventario.forms import UsuarioForm , EquipoForm , asignacionForm, pda
 from django.urls import reverse_lazy
 import pyrebase
 from django.contrib import auth
-from .filters import equipoFilter
+from .filters import equipoFilter, asignacionFilter
 from openpyxl import Workbook
 from django.http.response import HttpResponse
 # Create your views here.
@@ -76,7 +76,6 @@ class equipoShow(DetailView):
     template_name = 'equipos/equipo_show.html'
 
 def equipoBuscar(request):
-    
     f = equipoFilter(request.GET, queryset= equipo.objects.all())
     return render(request , 'equipos/equipo_search.html' , {'filter' : f})
   
@@ -140,6 +139,11 @@ class asignacionDelete(DeleteView):
 class asignacionShow(DetailView):
     model = asignacion
     template_name = 'asignacion/asignacion_show.html'
+
+def asignacionBuscar(request):
+    asig = asignacionFilter(request.GET, queryset= asignacion.objects.all())
+    return render(request , 'asignacion/asignacion_search.html' , {'filter' : asig})
+    
 
 class ReporteAsignacionExcel(TemplateView):
     def get(self,request,*args,**kwargs):

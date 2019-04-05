@@ -15,24 +15,22 @@
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                   <td>ID</td> 
-                   <td>Marca</td> 
-                   <td>Modelo</td> 
-                   <td>Serie</td> 
-                   <td>Rotulo</td> 
-                   <td>Fecha de ingreso</td> 
+                    <td>ID</td> 
+                    <td>Usuario asignado</td> 
+                    <td>Cargo</td> 
+                    <td>Departamento</td> 
+                    <td>Fecha de entrega</td> 
                 </tr>
             </thead>
             <tbody>
                 
-                {% for equipo in filter.qs %}
+                {% for asignacion in object_list %}
                 <tr>
-                    <td>{{ equipo.id}}</td>
-                    <td>{{ equipo.marca}}</td>
-                    <td>{{ equipo.modelo}}</td>
-                    <td>{{ equipo.serie}}</td>
-                    <td>{{ equipo.rotulo}}</td>
-                    <td>{{ equipo.fecha_ing}}</td>
+                    <td>{{ asignacion.id}}</td>
+                    <td>{{ asignacion.usuario_asig}}</td>
+                    <td>{{ asignacion.cargo}}</td>
+                    <td>{{ asignacion.departamento}}</td>
+                    <td>{{ asignacion.fecha_entrega}}</td>
                     
                 </tr>
                 {% endfor%}
