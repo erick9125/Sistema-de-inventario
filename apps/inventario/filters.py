@@ -27,3 +27,16 @@ class asignacionFilter(django_filters.FilterSet):
         fields = [
             'usuario_asig', 'fecha_entrega', 'serie_equipo_asig'
         ]
+
+
+class pdaFilter(django_filters.FilterSet):
+    def __init__(self, *args,**kwargs):
+        super(pdaFilter, self).__init__(*args,**kwargs)
+        self.filters['serie_pda'].label = 'Serie PDA :'
+        self.filters['fecha_ing'].label = 'Fecha de ingreso :'
+        
+    class Meta:
+        model = pda
+        fields =[
+            'serie_pda','fecha_ing'
+        ]

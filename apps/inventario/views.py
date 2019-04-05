@@ -6,7 +6,7 @@ from apps.inventario.forms import UsuarioForm , EquipoForm , asignacionForm, pda
 from django.urls import reverse_lazy
 import pyrebase
 from django.contrib import auth
-from .filters import equipoFilter, asignacionFilter
+from .filters import equipoFilter, asignacionFilter ,pdaFilter
 from openpyxl import Workbook
 from django.http.response import HttpResponse
 # Create your views here.
@@ -211,6 +211,10 @@ class pdaDelete(DeleteView):
 class pdaShow(DetailView):
     model = pda
     template_name = 'pda/pda_show.html'
+
+def pdaBuscar(request):
+    p = pdaFilter(request.GET, queryset= pda.objects.all())
+    return render(request , 'pda/pda_search.html' , {'filter' : p})
 
 class ReportePdaExcel(TemplateView):
     def get(self,request,*args,**kwargs):

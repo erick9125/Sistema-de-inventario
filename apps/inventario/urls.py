@@ -5,7 +5,7 @@ from . import views
 
 
 
-from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel,ReporteTelefonoExcel,equipoBuscar,asignacionBuscar
+from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel,ReporteTelefonoExcel,equipoBuscar,asignacionBuscar,pdaBuscar
 
 app_name = 'inventario'
 
@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^eliminarPda/(?P<pk>\d+)/$',pdaDelete.as_view(),name='pda_eliminar'),
     url(r'^mostrarPda/(?P<pk>\d+)/$',pdaShow.as_view(),name='pda_mostrar'),
     url(r'^reporte_excel_pda/',ReportePdaExcel.as_view(),name='pda_reporte'),
+    url(r'^buscarPDA/',views.pdaBuscar,name='pda_buscar'),
     #URL para telefono
     url(r'^nuevoTelefono/', telefonoCreate.as_view(),name='telefono_crear'),
     url(r'^listarTelefono/',telegonoList.as_view(),name='telefono_listar'),
