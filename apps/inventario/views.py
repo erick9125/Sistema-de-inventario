@@ -6,7 +6,7 @@ from apps.inventario.forms import UsuarioForm , EquipoForm , asignacionForm, pda
 from django.urls import reverse_lazy
 import pyrebase
 from django.contrib import auth
-from .filters import equipoFilter, asignacionFilter ,pdaFilter
+from .filters import equipoFilter, asignacionFilter ,pdaFilter, telefonoFilter
 from openpyxl import Workbook
 from django.http.response import HttpResponse
 # Create your views here.
@@ -285,6 +285,10 @@ class telefonoDelete(DeleteView):
 class telefonoShow(DetailView):
     model = telefono
     template_name = 'telefono/telefono_show.html'
+
+def telefonoBuscar(request):
+    t = telefonoFilter(request.GET, queryset= telefono.objects.all())
+    return render(request , 'telefono/telefono_search.html' , {'filter' : t})
 
 class ReporteTelefonoExcel(TemplateView):
     def get(self,request,*args,**kwargs):

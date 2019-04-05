@@ -40,3 +40,16 @@ class pdaFilter(django_filters.FilterSet):
         fields =[
             'serie_pda','fecha_ing'
         ]
+
+class telefonoFilter(django_filters.FilterSet):
+    def __init__(self,*args,**kwargs):
+        super(telefonoFilter,self).__init__(*args,**kwargs)
+        self.filters['serie_tel'].label = 'Serie o IMEI del teléfono :'
+        self.filters['numero_tel'].label = 'Número de teléfono :'
+        self.filters['fecha_ing_tel'].label = 'Fecha de ingreso :'
+
+    class Meta:
+        model = telefono
+        fields = [
+            'serie_tel', 'numero_tel' , 'fecha_ing_tel'
+        ]
