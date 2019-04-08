@@ -21,6 +21,8 @@ from django.conf.urls import url , include
 
 
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'',include('apps.inventario.urls')),
@@ -30,5 +32,6 @@ urlpatterns = [
     url(r'^equipo/',include('apps.inventario.urls', namespace='equipos')),
     url(r'^asignacion/',include('apps.inventario.urls', namespace='Asignacion')),
     url(r'^pda/',include('apps.inventario.urls', namespace='pda')),
-    url(r'^telefono/',include('apps.inventario.urls', namespace='telefono'))
+    url(r'^telefono/',include('apps.inventario.urls', namespace='telefono')),
+    
 ]

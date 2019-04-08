@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView , ListView,UpdateView, DeleteView,TemplateView
 from django.views.generic.detail import DetailView
 from apps.inventario.models import usuario ,equipo , asignacion , pda , telefono
@@ -9,6 +9,7 @@ from django.contrib import auth
 from .filters import equipoFilter, asignacionFilter ,pdaFilter, telefonoFilter
 from openpyxl import Workbook
 from django.http.response import HttpResponse
+
 # Create your views here.
 #vista de pagina home y login **************************************************************************************
 def home(request):
@@ -360,3 +361,4 @@ def postsign(request):
 def logout(request):
     auth.logout(request)
     return render(request,'home/homeLogin.html')
+

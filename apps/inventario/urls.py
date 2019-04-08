@@ -2,9 +2,6 @@ from django.contrib import admin
 from django.urls import path 
 from django.conf.urls import url , include
 from . import views
-
-
-
 from apps.inventario.views import UsuarioCreate, UsuarioList,usuarioDelete,EquipamientoCreate, AsignacionCreate, pdaCreate, telefonoCreate, UsuarioUpdate,usuarioShow,equipoList,equipoUpdate,equipoDelete,equipoShow,asignacionList,asignacionUpdate,asignacionDelete,asignacionShow,pdaList,pdaUpdate,pdaDelete,pdaShow,telegonoList,telefonoUpdate,telefonoDelete,telefonoShow,ReporteEquipoExcel,ReporteAsignacionExcel,ReportePdaExcel,ReporteTelefonoExcel,equipoBuscar,asignacionBuscar,pdaBuscar,telefonoBuscar
 
 app_name = 'inventario'
