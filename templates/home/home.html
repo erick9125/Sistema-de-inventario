@@ -1,14 +1,14 @@
 {% extends "base/base.html" %}
 
-<div class="container mt-5 my-5">
+{% block titulo %}Inicio{% endblock %}
 
-{% block header %}
-<div class="jumbotron">
-    <h1 class="display-4">Bienvenido! {{e}}</h1>
-    <p class="lead">Aqui podrás ingresar los datos de tu equipamiento, solo dirigete a la barra superior y selecciona la opción que necesites</p>
-    <hr class="my-4">
-    <p>si tienes algún problema por favor toma contacto con el administrador</p>
-    
+{% block contenido %}
+<div class="app-card">
+  <h1 class="h3 mb-2">Bienvenido{% if e %}, {{ e }}{% endif %}</h1>
+  <p class="text-muted mb-4">Sistema de inventario listo para gestionar equipos, asignaciones, PDA y telefonia.</p>
+  <div class="app-actions">
+    <a class="btn btn-primary" href="{% url 'equipos:equipo_listar' %}">Ver equipos</a>
+    <a class="btn btn-outline-secondary" href="{% url 'inventario:informe' %}">Ir a informes</a>
   </div>
-{% endblock%}
 </div>
+{% endblock %}

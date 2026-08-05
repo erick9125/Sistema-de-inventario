@@ -1,5 +1,6 @@
 from functools import wraps
 
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 
 from apps.inventario.application.container import get_auth_service
@@ -20,3 +21,7 @@ class FirebaseLoginRequiredMixin:
         if not get_auth_service().is_authenticated(request.session):
             return redirect("/")
         return super().dispatch(request, *args, **kwargs)
+
+
+class InventarioSuccessMixin(SuccessMessageMixin, FirebaseLoginRequiredMixin):
+    success_message = "Operacion realizada correctamente"

@@ -1,16 +1,17 @@
 {% extends "base/base.html" %}
 
-<div class="container mt-5 my-5">
+{% block titulo %}Eliminar asignacion{% endblock %}
 
 {% block contenido %}
-    
-    <form method="POST">
-        {% csrf_token %}
-        <h3>Desea eliminar el registro de {{object.id}}?</h3>
-        <button class="btn btn-danger" type="submit">Si,eliminar</button>
-        <a class="btn btn-default" href="{% url 'Asignacion:asignacion_listar' %}">Cancelar</a>
-        
-    </form>
-
-{% endblock %}
+<div class="app-page-header"><h1>Eliminar asignacion</h1></div>
+<div class="app-card">
+  <p class="mb-4">¿Desea eliminar la asignacion de <strong>{{ object.usuario_asig }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="d-flex flex-wrap gap-2">
+      <button class="btn btn-danger" type="submit">Eliminar</button>
+      <a class="btn btn-outline-secondary" href="{% url 'Asignacion:asignacion_listar' %}">Cancelar</a>
+    </div>
+  </form>
 </div>
+{% endblock %}

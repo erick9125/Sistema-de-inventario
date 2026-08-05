@@ -8,6 +8,7 @@ urlpatterns = [
     re_path(r"^$", views.singIn),
     re_path(r"^postsign/", views.postsign),
     re_path(r"^logout/", views.logout, name="log"),
+    re_path(r"^dashboard/", views.dashboard, name="dashboard"),
     re_path(r"^informe/", views.informe, name="informe"),
     re_path(r"^nuevoUsuario/", views.UsuarioCreate.as_view(), name="usuario_crear"),
     re_path(r"^listarUsuario/", views.UsuarioList.as_view(), name="usuario_listar"),

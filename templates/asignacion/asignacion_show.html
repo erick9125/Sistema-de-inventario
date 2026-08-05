@@ -1,23 +1,28 @@
 {% extends "base/base.html" %}
 
-<div class="container mt-5 my-5">
+{% block titulo %}Detalle asignacion{% endblock %}
 
 {% block contenido %}
-    <p><strong>ID:</strong>{{object.id}}</p>
-    <p><strong>Usuario Asignado:</strong>{{object.usuario_asig}}</p>
-    <p><strong>Cargo:</strong>{{object.cargo}}</p>
-    <p><strong>Departamento:</strong>{{object.departamento}}</p>
-    <p><strong>Marca equipo asignado:</strong>{{object.marca_equipo_asig}}</p>
-    <p><strong>Modelo equipo asignado:</strong>{{object.modelo_equipo_asig}}</p>
-    <p><strong>Serie equipo asignado:</strong>{{object.serie_equipo_asig}}</p>
-    <p><strong>Rotulo equipo asignado:</strong>{{object.rotulo_equipo_asig}}</p>
-    <p><strong>Tipo de equipo:</strong>{{object.tipo_equipo}}</p>
-    <p><strong>Activo:</strong>{{object.activo}}</p>
-
-    <a class="btn btn-success" href="{% url 'Asignacion:asignacion_listar' %}">OK</a>
-    <a class="btn btn-primary" href="{% url 'Asignacion:asignacion_editar' asignacion.id %}">Editar</a>
-    <a class="btn btn-danger" href="{% url 'Asignacion:asignacion_eliminar' asignacion.id %}">Eliminar</a>
-
-{% endblock %}
+<div class="app-page-header">
+  <h1>Detalle de asignacion</h1>
+  <div class="app-actions">
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'Asignacion:asignacion_editar' object.id %}">Editar</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'Asignacion:asignacion_eliminar' object.id %}">Eliminar</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'Asignacion:asignacion_listar' %}">Volver</a>
+  </div>
 </div>
-
+<div class="app-card">
+  <div class="row g-3">
+    <div class="col-md-6"><strong>Usuario</strong><div>{{ object.usuario_asig }}</div></div>
+    <div class="col-md-6"><strong>Cargo</strong><div>{{ object.cargo }}</div></div>
+    <div class="col-md-6"><strong>Departamento</strong><div>{{ object.departamento }}</div></div>
+    <div class="col-md-6"><strong>Fecha entrega</strong><div>{{ object.fecha_entrega }}</div></div>
+    <div class="col-md-6"><strong>Marca</strong><div>{{ object.marca_equipo_asig }}</div></div>
+    <div class="col-md-6"><strong>Modelo</strong><div>{{ object.modelo_equipo_asig }}</div></div>
+    <div class="col-md-6"><strong>Serie</strong><div>{{ object.serie_equipo_asig }}</div></div>
+    <div class="col-md-6"><strong>Rotulo</strong><div>{{ object.rotulo_equipo_asig }}</div></div>
+    <div class="col-md-6"><strong>Tipo</strong><div>{{ object.tipo_equipo }}</div></div>
+    <div class="col-md-6"><strong>Activo</strong><div>{{ object.activo|yesno:"Si,No" }}</div></div>
+  </div>
+</div>
+{% endblock %}

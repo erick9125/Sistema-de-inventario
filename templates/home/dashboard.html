@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+
+{% block titulo %}Dashboard | Sistema de inventario{% endblock %}
+
+{% block contenido %}
+<div class="app-page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p class="text-muted mb-0">Resumen del inventario{% if e %} · {{ e }}{% endif %}</p>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-4">
+    <a class="stat-card text-decoration-none" href="{% url 'equipos:equipo_listar' %}">
+      <span class="stat-label">Equipos</span>
+      <strong class="stat-value">{{ stats.equipos }}</strong>
+    </a>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-4">
+    <a class="stat-card text-decoration-none" href="{% url 'Asignacion:asignacion_listar' %}">
+      <span class="stat-label">Asignaciones</span>
+      <strong class="stat-value">{{ stats.asignaciones }}</strong>
+    </a>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-4">
+    <a class="stat-card text-decoration-none" href="{% url 'pda:pda_listar' %}">
+      <span class="stat-label">PDA</span>
+      <strong class="stat-value">{{ stats.pdas }}</strong>
+    </a>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-4">
+    <a class="stat-card text-decoration-none" href="{% url 'telefono:telefono_listar' %}">
+      <span class="stat-label">Telefonos</span>
+      <strong class="stat-value">{{ stats.telefonos }}</strong>
+    </a>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-4">
+    <a class="stat-card text-decoration-none" href="{% url 'usuario:usuario_listar' %}">
+      <span class="stat-label">Usuarios</span>
+      <strong class="stat-value">{{ stats.usuarios }}</strong>
+    </a>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-4">
+    <div class="stat-card stat-card-total">
+      <span class="stat-label">Total registros</span>
+      <strong class="stat-value">{{ stats.total }}</strong>
+    </div>
+  </div>
+</div>
+
+<div class="app-card">
+  <h2 class="h5 mb-3">Accesos rapidos</h2>
+  <div class="app-actions">
+    <a class="btn btn-primary btn-sm" href="{% url 'equipos:equipo_crear' %}">Nuevo equipo</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'Asignacion:asignacion_crear' %}">Nueva asignacion</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'telefono:telefono_crear' %}">Nuevo telefono</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'pda:pda_crear' %}">Nueva PDA</a>
+    <a class="btn btn-outline-dark btn-sm" href="{% url 'inventario:informe' %}">Informes</a>
+  </div>
+</div>
+{% endblock %}
