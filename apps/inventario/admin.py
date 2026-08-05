@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import *
 
-# Register your models here.
+from apps.inventario.infrastructure.persistence.models import (
+    Asignacion,
+    Equipo,
+    Pda,
+    Telefono,
+    Usuario,
+)
 
-admin.site.register(equipo)
-admin.site.register(asignacion)
-admin.site.register(telefono)
-admin.site.register(pda)
-admin.site.register(usuario)
+admin.site.register(Equipo)
+admin.site.register(Asignacion)
+admin.site.register(Telefono)
+admin.site.register(Pda)
+admin.site.register(Usuario)
