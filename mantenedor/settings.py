@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "apps.inventario.apps.InventarioConfig",
     "django_filters",
     "crispy_forms",
-    "crispy_bootstrap4",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.inventario.presentation.context_processors.shell_context",
             ],
         },
     },
@@ -107,11 +108,13 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = "/"
-LOGIN_REDIRECT_URL = "/listarequipo/"
+LOGIN_REDIRECT_URL = "/dashboard/"
 LOGOUT_REDIRECT_URL = "/"
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True

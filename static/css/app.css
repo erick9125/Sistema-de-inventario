@@ -1,0 +1,369 @@
+:root {
+  --app-surface: #f4f6f8;
+  --app-ink: #1f2933;
+  --app-accent: #0d6efd;
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body.app-body {
+  background: var(--app-surface);
+  color: var(--app-ink);
+}
+
+body.has-sidebar {
+  overflow-x: hidden;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-sidebar {
+  width: var(--sidebar-width);
+  background: #111827;
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 1040;
+  transform: translateX(-100%);
+  transition: transform 0.2s ease;
+}
+
+body.sidebar-open .app-sidebar {
+  transform: translateX(0);
+}
+
+@media (min-width: 992px) {
+  .app-sidebar {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-brand small {
+  display: block;
+  color: #9ca3af;
+}
+
+.sidebar-logo,
+.topbar-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.55rem;
+}
+
+.sidebar-nav {
+  padding: 0.75rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sidebar-section {
+  margin: 0.85rem 0.5rem 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.sidebar-group {
+  margin-bottom: 0.2rem;
+}
+
+.sidebar-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: transparent;
+  border: 0;
+  color: #e5e7eb;
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.sidebar-toggle::after {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid #9ca3af;
+  border-bottom: 2px solid #9ca3af;
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle:not(.collapsed)::after {
+  transform: rotate(-135deg);
+}
+
+.sidebar-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sidebar-submenu {
+  padding: 0.15rem 0 0.35rem 0.55rem;
+}
+
+.sidebar-submenu .sidebar-link {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  padding: 0.38rem 0.7rem;
+}
+
+.sidebar-link {
+  display: block;
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.5rem;
+  font-size: 0.92rem;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sidebar-link.danger {
+  color: #fca5a5;
+}
+
+.sidebar-footer {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 0;
+}
+
+@media (min-width: 992px) {
+  .app-content {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+.app-topbar {
+  min-height: var(--topbar-height);
+  background: #fff;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.topbar-brand {
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 600;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topbar-clock {
+  font-variant-numeric: tabular-nums;
+  color: #4b5563;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.topbar-user small {
+  display: block;
+  color: #6b7280;
+}
+
+.topbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 1035;
+}
+
+body.sidebar-open .sidebar-backdrop {
+  display: block;
+}
+
+.app-main {
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+.app-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.app-page-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 650;
+}
+
+.app-card {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.stat-card {
+  display: block;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0.85rem;
+  padding: 1.1rem 1.2rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  color: inherit;
+}
+
+.stat-card-total {
+  background: #111827;
+  color: #fff;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.35rem;
+}
+
+.stat-card-total .stat-label {
+  color: #9ca3af;
+}
+
+.stat-value {
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.app-table thead th {
+  white-space: nowrap;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.toast-container {
+  z-index: 1100;
+}
+
+body.login-body {
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.login-card {
+  background: rgba(33, 37, 41, 0.88);
+  color: #fff;
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.login-card .form-control {
+  min-height: 2.75rem;
+}
+
+.login-avatar {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+}
+
+.informe-card {
+  height: 100%;
+  border: 0;
+  border-radius: 0.85rem;
+}
+
+.informe-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.informe-card .btn {
+  margin-top: auto;
+}
+
+@media (max-width: 575.98px) {
+  .topbar-clock {
+    display: none;
+  }
+
+  .topbar-user strong {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
+}

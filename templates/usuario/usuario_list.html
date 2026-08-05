@@ -1,51 +1,45 @@
 {% extends "base/base.html" %}
 
-<div class="container mt-5 my-5">
-    {% block contenido %}
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <td>Nombre</td>
-                    <td>Apellido</td>
-                    <td>Cargo</td>
-                    <td>Correo</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% if object_list %}
-                {% for usuario in object_list %}
-                <tr>
-                    <td>{{ usuario.nombre}}</td>
-                    <td>{{ usuario.apellido}}</td>
-                    <td>{{ usuario.cargo}}</td>
-                    <td>{{ usuario.email}}</td>
-                    <td>
-                        <a class="btn btn-primary" href="{% url 'usuario:usuario_mostrar' usuario.id %}">Ver</a>
-                        <a class="btn btn-primary" href="{% url 'usuario:usuario_editar' usuario.id %}">Editar</a>
-                        <a class="btn btn-danger" href="{% url 'usuario:usuario_eliminar'  usuario.id %}">Eliminar</a>
-                    </td>
-                </tr>
-                {% endfor%}
-                {% else %}
-                    <h1>no hay registro de usuarios</h1>
-                {% endif%}
-            </tbody>
+{% block titulo %}Usuarios{% endblock %}
 
-        </table>
-        <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    {% if page_obj.has_previous %}
-                      <a class="page-link" href="?page={{page_obj.previous_page_number}}">Anterior</a>
-                      {% endif%}
-                    </li>
-                  
-                  <li class="page-item">
-                        {% if page_obj.has_next %}
-                      <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
-                      {% endif%}
-                </li>
-                </ul>
-        </nav>
-    {% endblock %}
+{% block contenido %}
+<div class="app-page-header">
+  <h1>Usuarios</h1>
+  <a class="btn btn-primary btn-sm" href="{% url 'usuario:usuario_crear' %}">Nuevo usuario</a>
 </div>
+<div class="app-card">
+  <div class="table-responsive">
+    <table class="table table-hover table-sm align-middle app-table mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Cargo</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usuario in object_list %}
+        <tr>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apellido }}</td>
+          <td>{{ usuario.cargo }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>
+            <div class="app-actions">
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'usuario:usuario_mostrar' usuario.id %}">Ver</a>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'usuario:usuario_editar' usuario.id %}">Editar</a>
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'usuario:usuario_eliminar' usuario.id %}">Eliminar</a>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center text-muted py-4">No hay registros de usuarios.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% include "partials/pagination.html" %}
+</div>
+{% endblock %}

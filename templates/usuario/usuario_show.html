@@ -1,16 +1,22 @@
 {% extends "base/base.html" %}
 
-<div class="container mt-5 my-5">
+{% block titulo %}Detalle usuario{% endblock %}
 
 {% block contenido %}
-    <p><strong>Nombre:</strong>{{object.nombre}}</p>
-    <p><strong>Apellido:</strong>{{object.apellido}}</p>
-    <p><strong>Cargo:</strong>{{object.cargo}}</p>
-    <p><strong>Email:</strong>{{object.email}}</p>
-
-    <a class="btn btn-success" href="{% url 'usuario:usuario_listar' %}">OK</a>
-    <a class="btn btn-success" href="{% url 'usuario:usuario_editar' usuario.id %}">Editar</a>
-    <a class="btn btn-success" href="{% url 'usuario:usuario_eliminar' usuario.id %}">Eliminar</a>
-
-{% endblock %}
+<div class="app-page-header">
+  <h1>Detalle de usuario</h1>
+  <div class="app-actions">
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'usuario:usuario_editar' object.id %}">Editar</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'usuario:usuario_eliminar' object.id %}">Eliminar</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'usuario:usuario_listar' %}">Volver</a>
+  </div>
 </div>
+<div class="app-card">
+  <div class="row g-3">
+    <div class="col-md-6"><strong>Nombre</strong><div>{{ object.nombre }}</div></div>
+    <div class="col-md-6"><strong>Apellido</strong><div>{{ object.apellido }}</div></div>
+    <div class="col-md-6"><strong>Cargo</strong><div>{{ object.cargo }}</div></div>
+    <div class="col-md-6"><strong>Email</strong><div>{{ object.email }}</div></div>
+  </div>
+</div>
+{% endblock %}

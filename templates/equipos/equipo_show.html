@@ -1,20 +1,27 @@
 {% extends "base/base.html" %}
 
-<div class="container mt-5 my-5">
+{% block titulo %}Detalle equipo{% endblock %}
 
 {% block contenido %}
-    <p><strong>ID:</strong>{{object.id}}</p>
-    <p><strong>Marca:</strong>{{object.marca}}</p>
-    <p><strong>Modelo:</strong>{{object.modelo}}</p>
-    <p><strong>Serie:</strong>{{object.serie}}</p>
-    <p><strong>Rotulo:</strong>{{object.rotulo}}</p>
-    <p><strong>Fecha de Ingreso:</strong>{{object.fecha_ing}}</p>
-    <p><strong>Tipo:</strong>{{object.tipo}}</p>
-    <p><strong>Descripción:</strong>{{object.descripcion}}</p>
-
-    <a class="btn btn-success" href="{% url 'equipos:equipo_listar' %}">OK</a>
-    <a class="btn btn-primary" href="{% url 'equipos:equipo_editar' equipo.id %}">Editar</a>
-    <a class="btn btn-danger" href="{% url 'equipos:equipo_eliminar' equipo.id %}">Eliminar</a>
-
-{% endblock %}
+<div class="app-page-header">
+  <h1>Detalle de equipo</h1>
+  <div class="app-actions">
+    <a class="btn btn-outline-secondary btn-sm" href="{% url 'equipos:equipo_editar' object.id %}">Editar</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'equipos:equipo_eliminar' object.id %}">Eliminar</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'equipos:equipo_listar' %}">Volver</a>
+  </div>
 </div>
+<div class="app-card">
+  <div class="row g-3">
+    <div class="col-md-6"><strong>ID</strong><div>{{ object.id }}</div></div>
+    <div class="col-md-6"><strong>Marca</strong><div>{{ object.marca }}</div></div>
+    <div class="col-md-6"><strong>Modelo</strong><div>{{ object.modelo }}</div></div>
+    <div class="col-md-6"><strong>Serie</strong><div>{{ object.serie }}</div></div>
+    <div class="col-md-6"><strong>Rotulo</strong><div>{{ object.rotulo }}</div></div>
+    <div class="col-md-6"><strong>Fecha ingreso</strong><div>{{ object.fecha_ing }}</div></div>
+    <div class="col-md-6"><strong>Tipo</strong><div>{{ object.tipo }}</div></div>
+    <div class="col-md-6"><strong>Activo</strong><div>{{ object.activo|yesno:"Si,No" }}</div></div>
+    <div class="col-12"><strong>Descripcion</strong><div>{{ object.descripcion }}</div></div>
+  </div>
+</div>
+{% endblock %}

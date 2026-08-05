@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
@@ -6,14 +7,19 @@ from apps.inventario.application.services.reporte_service import ReporteService
 from apps.inventario.infrastructure.persistence.models import Asignacion
 from apps.inventario.presentation.filters import AsignacionFilter
 from apps.inventario.presentation.forms import AsignacionForm
-from apps.inventario.presentation.mixins import FirebaseLoginRequiredMixin, firebase_login_required
+from apps.inventario.presentation.mixins import (
+    FirebaseLoginRequiredMixin,
+    InventarioSuccessMixin,
+    firebase_login_required,
+)
 
 
-class AsignacionCreate(FirebaseLoginRequiredMixin, CreateView):
+class AsignacionCreate(InventarioSuccessMixin, CreateView):
     model = Asignacion
     form_class = AsignacionForm
     template_name = "asignacion/asignacion_form.html"
     success_url = reverse_lazy("Asignacion:asignacion_listar")
+    success_message = "Asignacion registrada correctamente"
 
 
 class AsignacionList(FirebaseLoginRequiredMixin, ListView):
@@ -23,17 +29,23 @@ class AsignacionList(FirebaseLoginRequiredMixin, ListView):
     paginate_by = 15
 
 
-class AsignacionUpdate(FirebaseLoginRequiredMixin, UpdateView):
+class AsignacionUpdate(InventarioSuccessMixin, UpdateView):
     model = Asignacion
     form_class = AsignacionForm
     template_name = "asignacion/asignacion_form.html"
     success_url = reverse_lazy("Asignacion:asignacion_listar")
+    success_message = "Asignacion actualizada correctamente"
 
 
-class AsignacionDelete(FirebaseLoginRequiredMixin, DeleteView):
+class AsignacionDelete(InventarioSuccessMixin, DeleteView):
     model = Asignacion
     template_name = "asignacion/asignacion_delete.html"
     success_url = reverse_lazy("Asignacion:asignacion_listar")
+    success_message = "Asignacion eliminada correctamente"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
 
 
 class AsignacionShow(FirebaseLoginRequiredMixin, DetailView):
@@ -44,7 +56,11 @@ class AsignacionShow(FirebaseLoginRequiredMixin, DetailView):
 @firebase_login_required
 def asignacion_buscar(request):
     filtro = AsignacionFilter(request.GET, queryset=Asignacion.objects.all())
-    return render(request, "asignacion/asignacion_search.html", {"filter": filtro})
+    return render(
+        request,
+        "asignacion/asignacion_search.html",
+        {"filter": filtro, "object_list": filtro.qs},
+    )
 
 
 class ReporteAsignacionExcel(FirebaseLoginRequiredMixin, TemplateView):

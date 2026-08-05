@@ -1,86 +1,152 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>{% block titulo %}{% endblock %}</title>
+  <title>{% block titulo %}Sistema de inventario{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  {% block extra_css %}{% endblock %}
 </head>
-<body>
-  <div class="container-fluid bg-dark">
-      {% block barra %}
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Sistema de inventario</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mr-4">
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    PC y Portatiles
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'equipos:equipo_crear' %}">Agregar Equipamiento</a>
-                    <a class="dropdown-item" href="{% url 'equipos:equipo_listar' %}">Modificar Equipamiento</a>
-                    <a class="dropdown-item" href="{% url 'equipos:equipo_buscar' %}">Buscar Equipamiento</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Asignación de equipos
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'Asignacion:asignacion_crear' %}">Nueva asignación</a>
-                    <a class="dropdown-item" href="{% url 'Asignacion:asignacion_listar' %}">Modificar asignación</a>
-                    <a class="dropdown-item" href="{% url 'Asignacion:asignacion_buscar' %}">Buscar asignación</a>
-                  </div>
-                </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Telefonia
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'telefono:telefono_crear' %}">Agregar Telefonos</a>
-                  <a class="dropdown-item" href="{% url 'telefono:telefono_listar' %}">Modificar telefonos</a>
-                  <a class="dropdown-item" href="{% url 'telefono:telefono_buscar' %}">Buscar telefonos</a>
-                  
-                </div>
-              </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                PDA
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'pda:pda_crear' %}">Agregar PDA</a>
-                <a class="dropdown-item" href="{% url 'pda:pda_listar' %}">Modificar PDA</a>
-                <a class="dropdown-item" href="{% url 'pda:pda_buscar' %}">Buscar PDA</a>
-              </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'inventario:informe' %}">Informes</a>
-              </li> 
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'inventario:log' %}">Cerrar Sesión</a>
-            </li>           
+<body class="app-body has-sidebar">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <img src="{% static 'img/logo.svg' %}" alt="Logo" class="sidebar-logo">
+        <div>
+          <strong>Inventario</strong>
+          <small>Panel interno</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav accordion" id="sidebarAccordion">
+        <a class="sidebar-link" href="{% url 'inventario:dashboard' %}">Dashboard</a>
+
+        <div class="sidebar-group">
+          <button class="sidebar-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menuEquipos" aria-expanded="false" aria-controls="menuEquipos">
+            Equipos
+          </button>
+          <div id="menuEquipos" class="collapse" data-bs-parent="#sidebarAccordion">
+            <div class="sidebar-submenu">
+              <a class="sidebar-link" href="{% url 'equipos:equipo_listar' %}">Listar</a>
+              <a class="sidebar-link" href="{% url 'equipos:equipo_crear' %}">Agregar</a>
+              <a class="sidebar-link" href="{% url 'equipos:equipo_buscar' %}">Buscar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-group">
+          <button class="sidebar-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menuAsignaciones" aria-expanded="false" aria-controls="menuAsignaciones">
+            Asignaciones
+          </button>
+          <div id="menuAsignaciones" class="collapse" data-bs-parent="#sidebarAccordion">
+            <div class="sidebar-submenu">
+              <a class="sidebar-link" href="{% url 'Asignacion:asignacion_listar' %}">Listar</a>
+              <a class="sidebar-link" href="{% url 'Asignacion:asignacion_crear' %}">Agregar</a>
+              <a class="sidebar-link" href="{% url 'Asignacion:asignacion_buscar' %}">Buscar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-group">
+          <button class="sidebar-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menuTelefonos" aria-expanded="false" aria-controls="menuTelefonos">
+            Telefonos
+          </button>
+          <div id="menuTelefonos" class="collapse" data-bs-parent="#sidebarAccordion">
+            <div class="sidebar-submenu">
+              <a class="sidebar-link" href="{% url 'telefono:telefono_listar' %}">Listar</a>
+              <a class="sidebar-link" href="{% url 'telefono:telefono_crear' %}">Agregar</a>
+              <a class="sidebar-link" href="{% url 'telefono:telefono_buscar' %}">Buscar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-group">
+          <button class="sidebar-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menuPda" aria-expanded="false" aria-controls="menuPda">
+            PDA
+          </button>
+          <div id="menuPda" class="collapse" data-bs-parent="#sidebarAccordion">
+            <div class="sidebar-submenu">
+              <a class="sidebar-link" href="{% url 'pda:pda_listar' %}">Listar</a>
+              <a class="sidebar-link" href="{% url 'pda:pda_crear' %}">Agregar</a>
+              <a class="sidebar-link" href="{% url 'pda:pda_buscar' %}">Buscar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-group">
+          <button class="sidebar-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menuUsuarios" aria-expanded="false" aria-controls="menuUsuarios">
+            Usuarios
+          </button>
+          <div id="menuUsuarios" class="collapse" data-bs-parent="#sidebarAccordion">
+            <div class="sidebar-submenu">
+              <a class="sidebar-link" href="{% url 'usuario:usuario_listar' %}">Listar</a>
+              <a class="sidebar-link" href="{% url 'usuario:usuario_crear' %}">Agregar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-group">
+          <button class="sidebar-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menuReportes" aria-expanded="false" aria-controls="menuReportes">
+            Reportes
+          </button>
+          <div id="menuReportes" class="collapse" data-bs-parent="#sidebarAccordion">
+            <div class="sidebar-submenu">
+              <a class="sidebar-link" href="{% url 'inventario:informe' %}">Informes Excel</a>
+            </div>
+          </div>
         </div>
       </nav>
-      {% endblock %}
-  </div>
-  <div class="container mt-5 my-5">
-    {% block header %}
-    {% endblock %}
-</div>
-  <div class="container mt-5 my-5">
-    {% block contenido %}
-    {% endblock %}
-  </div>
-  
 
+      <div class="sidebar-footer">
+        <a class="sidebar-link danger" href="{% url 'inventario:log' %}">Cerrar sesion</a>
+      </div>
+    </aside>
+
+    <div class="app-content">
+      <header class="app-topbar">
+        <button class="btn btn-outline-secondary btn-sm d-lg-none" type="button" id="sidebarToggle" aria-label="Abrir menu">
+          Menu
+        </button>
+
+        <div class="topbar-brand d-none d-lg-flex">
+          <img src="{% static 'img/logo.svg' %}" alt="Logo" class="topbar-logo">
+          <span>Sistema de inventario</span>
+        </div>
+
+        <div class="topbar-meta ms-auto">
+          <div class="topbar-clock" id="app-clock" data-initial="{{ ahora|date:'d/m/Y H:i:s' }}">
+            {{ ahora|date:"d/m/Y H:i:s" }}
+          </div>
+          <div class="topbar-user">
+            <img src="{% static 'img/user.png' %}" alt="" class="topbar-avatar">
+            <div>
+              <strong>{{ usuario_sesion|default:"Usuario" }}</strong>
+              <small>Sesion activa</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-main">
+        {% block header %}{% endblock %}
+        {% block contenido %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  <div class="sidebar-backdrop d-lg-none" id="sidebarBackdrop"></div>
+
+  {% include "partials/toasts.html" %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"></script>
+  <script src="{% static 'js/toasts.js' %}"></script>
+  <script src="{% static 'js/clock.js' %}"></script>
+  <script src="{% static 'js/sidebar.js' %}"></script>
+  {% block extra_js %}{% endblock %}
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>

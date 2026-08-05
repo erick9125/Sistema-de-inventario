@@ -1,57 +1,50 @@
 {% extends "base/base.html" %}
 {% load crispy_forms_tags %}
 
+{% block titulo %}Buscar asignaciones{% endblock %}
 
-<div class="container mt-5 my-5">
-    {% block contenido %}
-
-    <div class="container my-5">
-        <form method="GET">
-            {% csrf_token %}
-            {{ filter.form |crispy}}
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Buscar</button>
-        </form>
-    </div>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <td>ID</td> 
-                    <td>Usuario asignado</td> 
-                    <td>Cargo</td> 
-                    <td>Departamento</td> 
-                    <td>Fecha de entrega</td> 
-                </tr>
-            </thead>
-            <tbody>
-                
-                {% for asignacion in object_list %}
-                <tr>
-                    <td>{{ asignacion.id}}</td>
-                    <td>{{ asignacion.usuario_asig}}</td>
-                    <td>{{ asignacion.cargo}}</td>
-                    <td>{{ asignacion.departamento}}</td>
-                    <td>{{ asignacion.fecha_entrega}}</td>
-                    
-                </tr>
-                {% endfor%}
-                
-            </tbody>
-            
-        </table>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    {% if page_obj.has_previous %}
-                      <a class="page-link" href="?page={{page_obj.previous_page_number}}">Anterior</a>
-                      {% endif%}
-                    </li>
-                  
-                  <li class="page-item">
-                        {% if page_obj.has_next %}
-                      <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
-                      {% endif%}
-                </li>
-                </ul>
-              </nav>
-    {% endblock %}
+{% block contenido %}
+<div class="app-page-header">
+  <h1>Buscar asignaciones</h1>
+  <a class="btn btn-outline-secondary btn-sm" href="{% url 'Asignacion:asignacion_listar' %}">Volver al listado</a>
 </div>
+<div class="app-card mb-3">
+  <form method="get">
+    {{ filter.form|crispy }}
+    <button class="btn btn-primary mt-2" type="submit">Buscar</button>
+  </form>
+</div>
+<div class="app-card">
+  <div class="table-responsive">
+    <table class="table table-hover table-sm align-middle app-table mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Entrega</th>
+          <th>Serie</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in filter.qs %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.usuario_asig }}</td>
+          <td>{{ item.fecha_entrega }}</td>
+          <td>{{ item.serie_equipo_asig }}</td>
+          <td>
+            <div class="app-actions">
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'Asignacion:asignacion_mostrar' item.id %}">Ver</a>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'Asignacion:asignacion_editar' item.id %}">Editar</a>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center text-muted py-4">Sin resultados.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -12,6 +12,7 @@ from apps.inventario.presentation.views.asignacion import (
     asignacionUpdate,
 )
 from apps.inventario.presentation.views.auth import (
+    dashboard,
     informe,
     logout,
     postsign,
@@ -72,6 +73,7 @@ __all__ = [
     "singIn",
     "postsign",
     "logout",
+    "dashboard",
     "informe",
     "UsuarioCreate",
     "UsuarioList",

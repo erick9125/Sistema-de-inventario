@@ -1,0 +1,24 @@
+<div class="row g-3">
+  {% for field in form %}
+  <div class="col-12 {% if field.name != 'descripcion' and field.name != 'descripcion_pda' and field.field.widget.input_type != 'checkbox' %}col-md-6{% endif %}">
+    {% if field.field.widget.input_type == "checkbox" %}
+    <div class="form-check mt-4">
+      {{ field }}
+      <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    </div>
+    {% else %}
+    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% endif %}
+    {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+    {% for error in field.errors %}
+    <div class="invalid-feedback d-block">{{ error }}</div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% if form.non_field_errors %}
+<div class="alert alert-danger mt-3 mb-0">
+  {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+</div>
+{% endif %}

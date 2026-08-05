@@ -2,9 +2,9 @@
 
 Aplicacion web para gestionar inventario de equipos, asignaciones, PDA, telefonos y usuarios.
 
-Stack: **Django 5.2**, SQLite, Bootstrap, autenticacion con **Firebase Auth** (puerto/adaptador), despliegue con **Docker**.
+Stack: **Django 5.2**, SQLite, **Bootstrap 5** (toasts), autenticacion con **Firebase Auth** (puerto/adaptador), despliegue con **Docker**.
 
-Rama de trabajo: `mantenimiento/arquitectura-limpia-seguridad`
+Rama UI: `mejora/redisenio-ui-bootstrap`
 
 ---
 
