@@ -1,0 +1,45 @@
+from django.urls import re_path
+
+from apps.inventario.presentation import views
+
+app_name = "inventario"
+
+urlpatterns = [
+    re_path(r"^$", views.singIn),
+    re_path(r"^postsign/", views.postsign),
+    re_path(r"^logout/", views.logout, name="log"),
+    re_path(r"^informe/", views.informe, name="informe"),
+    re_path(r"^nuevoUsuario/", views.UsuarioCreate.as_view(), name="usuario_crear"),
+    re_path(r"^listarUsuario/", views.UsuarioList.as_view(), name="usuario_listar"),
+    re_path(r"^EliminarUsuario/(?P<pk>\d+)/$", views.usuarioDelete.as_view(), name="usuario_eliminar"),
+    re_path(r"^EditarUsuario/(?P<pk>\d+)/$", views.UsuarioUpdate.as_view(), name="usuario_editar"),
+    re_path(r"^mostrarUsuario/(?P<pk>\d+)/$", views.usuarioShow.as_view(), name="usuario_mostrar"),
+    re_path(r"^nuevoEquipo/", views.EquipamientoCreate.as_view(), name="equipo_crear"),
+    re_path(r"^listarequipo/", views.equipoList.as_view(), name="equipo_listar"),
+    re_path(r"^editarEquipo/(?P<pk>\d+)/$", views.equipoUpdate.as_view(), name="equipo_editar"),
+    re_path(r"^eliminarEquipo/(?P<pk>\d+)/$", views.equipoDelete.as_view(), name="equipo_eliminar"),
+    re_path(r"^mostrarEquipo/(?P<pk>\d+)/$", views.equipoShow.as_view(), name="equipo_mostrar"),
+    re_path(r"^reporte_excel_equipo/", views.ReporteEquipoExcel.as_view(), name="equipo_reporte"),
+    re_path(r"^buscarEquipo/", views.equipoBuscar, name="equipo_buscar"),
+    re_path(r"^nuevaAsignacion/", views.AsignacionCreate.as_view(), name="asignacion_crear"),
+    re_path(r"^listarAsignacion/", views.asignacionList.as_view(), name="asignacion_listar"),
+    re_path(r"^editarAsignacion/(?P<pk>\d+)/$", views.asignacionUpdate.as_view(), name="asignacion_editar"),
+    re_path(r"^eliminarAsignacion/(?P<pk>\d+)/$", views.asignacionDelete.as_view(), name="asignacion_eliminar"),
+    re_path(r"^mostrarAsignacion/(?P<pk>\d+)/$", views.asignacionShow.as_view(), name="asignacion_mostrar"),
+    re_path(r"^reporte_excel_asignacion/", views.ReporteAsignacionExcel.as_view(), name="asignacion_reporte"),
+    re_path(r"^buscarAsignacion/", views.asignacionBuscar, name="asignacion_buscar"),
+    re_path(r"^nuevaPda/", views.pdaCreate.as_view(), name="pda_crear"),
+    re_path(r"^listarpda/", views.pdaList.as_view(), name="pda_listar"),
+    re_path(r"^editarPda/(?P<pk>\d+)/$", views.pdaUpdate.as_view(), name="pda_editar"),
+    re_path(r"^eliminarPda/(?P<pk>\d+)/$", views.pdaDelete.as_view(), name="pda_eliminar"),
+    re_path(r"^mostrarPda/(?P<pk>\d+)/$", views.pdaShow.as_view(), name="pda_mostrar"),
+    re_path(r"^reporte_excel_pda/", views.ReportePdaExcel.as_view(), name="pda_reporte"),
+    re_path(r"^buscarPDA/", views.pdaBuscar, name="pda_buscar"),
+    re_path(r"^nuevoTelefono/", views.telefonoCreate.as_view(), name="telefono_crear"),
+    re_path(r"^listarTelefono/", views.telegonoList.as_view(), name="telefono_listar"),
+    re_path(r"^editarTelefono/(?P<pk>\d+)/$", views.telefonoUpdate.as_view(), name="telefono_editar"),
+    re_path(r"^eliminarTelefono/(?P<pk>\d+)/$", views.telefonoDelete.as_view(), name="telefono_eliminar"),
+    re_path(r"^mostrarTelefono/(?P<pk>\d+)/$", views.telefonoShow.as_view(), name="telefono_mostrar"),
+    re_path(r"^reporte_excel_telefono/", views.ReporteTelefonoExcel.as_view(), name="telefono_reporte"),
+    re_path(r"^buscarTelefono/", views.telefonoBuscar, name="telefono_buscar"),
+]

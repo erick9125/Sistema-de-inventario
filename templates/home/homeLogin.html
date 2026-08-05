@@ -1,7 +1,7 @@
 {% extends "base/baseLogin.html" %}
 {% if messg %}
 <script>
-  alert('{{messg}}');
+  alert('{{ messg|escapejs }}');
 </script>
 {% endif %}
 
